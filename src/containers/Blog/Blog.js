@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 //import axios from '../../axios';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
+import FullPost from './FullPost/FullPost';
 import './Blog.css';
-import { Route } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 class Blog extends Component {
 
@@ -15,16 +16,37 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><a href='/'>Home</a></li>
-                            <li><a href='/new-post'>New Post</a></li>
+                            <li>
+                                <NavLink 
+                                    exact='true'
+                                    to='/'
+                                    activeClassName='my-active'
+                                    activeStyle={{
+                                        color: '#fa923f',
+                                        textDecoration: "underline"
+                                    }}
+                                    >Home
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to={{
+                                    pathname: '/new-post',
+                                    hash: '#submit',
+                                    search: '?search=text'
+                                    }}
+                                    >New Post
+                                </NavLink>
+                            </li>
                         </ul>
                     </nav>
                 </header>
                 {/* <Route exact path='/' render={() => <h1>Home</h1>}/> */}
                 <Route path='/' exact component={Posts}/>
                 <Route path='/new-post' exact component={NewPost}/>
+                <Route path='/:id' exact component={FullPost}/>
             </div>
-        );
+        ); 
     }
 }
 
